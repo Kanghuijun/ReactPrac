@@ -1,0 +1,147 @@
+* {
+    list-style: none;
+    text-decoration: none;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Noto Serif KR', serif;
+    overflow: hidden;
+    margin: 0;
+}
+
+header {
+    padding: 0 50px;
+}
+
+header > nav {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+}
+
+.logo {
+    width: 50px;
+}
+
+header> nav >ul > li {
+    display: inline-block;
+    padding: 0 10px;
+} 
+
+header> nav >ul > li > a {
+    color: black;
+}
+
+main {
+    text-align: center;
+}
+
+footer {
+    background-color: rgb(244, 244, 244);
+    border-top: 1px solid rgb(218, 218, 218);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 30px 50px;
+    font-size: 0.8rem;
+    color: gray;
+}
+
+.default-btn {
+    padding: 5px 15px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    border-radius: 3px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.toggleBtn {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .logo-wrap {
+        width: 100%;
+
+    }
+    .logo {
+        padding: 10px;
+        width: 40px;
+    }
+    header {
+        padding: 0;
+    }
+    nav {
+        display: flex;
+        flex-direction: column;
+    }
+    header > nav > ul {
+        display: none;
+        padding: 0;
+        margin-top: -10px;
+    }
+    header > nav > ul.show {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+    header > nav > ul > li {
+        margin: 10px 0;
+    }
+
+    .toggleBtn {
+        display: block;
+        position: absolute;
+        right: 10px;
+        font-size: 24px;
+        top: 15px;
+    }
+    
+}
+
+.score-container {
+    display: flex;
+    align-items: center;
+    padding-left: 50px;
+}
+.addTodoBtn {
+    border-radius: 50%;
+    padding: 5px 6px;
+    margin-left: 10px;
+    background-color: white;
+    border: 1px solid black;
+    cursor: pointer;
+}
+.default-input {
+    padding: 5px 10px;
+    outline: none;
+}
+
+.default-input:focus {
+    border: 3px solid black;
+}
+
+.addTodoBtn:hover {
+    transform: scale(1.2);  /*1.2배 확대*/  
+    transition: .5s; /*부드럽게*/
+}
+
+#list-box {
+    height: 300px;
+    overflow-y: scroll;
+    width: 200px;
+    margin: 0 auto;
+    padding-left: 0;
+}
+
+#list-box li {
+    cursor: pointer;
+    padding: 10px;
+    margin: 15px 0;
+    background-color: wheat;
+}

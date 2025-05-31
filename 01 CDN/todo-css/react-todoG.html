@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>React Todolist</title>
+  <link rel="stylesheet" href="./todo.css" />
+</head>
+<body>
+
+  <div id="root"></div>
+
+  <!-- React & Babel 라이브러리 연결 -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- 리액트 코드 시작 (Babel로 변환) -->
+  <script type="text/babel">
+    // React 안에 있는 useState 함수 가져오기
+    const { useState } = React;
+
+    // 하나의 할 일(TodoItem)을 나타내는 컴포넌트
+    const TodoItem = (props) => {
+      return (
+        // li(리스트) 클릭하면 props로 받은 onClickCB 함수를 호출
+        <li onClick={(e) => props.onClickCB(e, props.idx)}>
+          {props.todo} {/* 할 일 내용 출력 */}
+        </li>
+      );
+    };
+
+    // 점수(칭찬 점수)를 보여주는 컴포넌트
+    const ScoreComp = (props) => {
+      return (
+        <section className="score-container">
+          <p>칭찬점수 : <span id="score-num">{props.score}</span>점</p>
+        </section>
+      );
+    };
+
+    // 페이지 하단의 고정된 문구 (푸터) 컴포넌트
+    const Footer = () => {
+      return (
+        <footer>
+          Copyright © 2025 All Rights Reserved.
+        </footer>
+      );
+    };
+
+    // 할 일 입력창과, 추가 버튼, 할 일 목록을 보여주는 컴포넌트
+    const TodoContainer = (props) => {
+      return (
+        <section>
+          <h2>할일목록</h2>
+
+          {/* 입력창 */}
+          <input 
+            value={props.inputVal} 
+            onChange={props.onChangeHandler} 
+            className="default-input" 
+            type="text" 
+          />
+
+          {/* 추가 버튼 */}
+          <button 
+            onClick={props.onClickHandler} 
+            className="addTodoBtn"
+          >
+            ✚
+          </button>
+
+          {/* 할 일 리스트 */}
+          <ul id="list-box">
+            {props.todoList.map((item, idx) => (
+              <TodoItem 
+                todo={item} 
+                key={idx}
+                idx={idx}
+                onClickCB={props.onClickCB}
+              />
+            ))}
+          </ul>
+        </section>
+      );
+    };
+
+    // 전체 앱을 관리하는 메인 컨테이너 컴포넌트
+    const Container = () => {
+      // input 입력값 상태
+      const [inputVal, setInputValue] = useState('');
+      // 할 일 목록 상태
+      const [todo, setTodo] = useState([]);
+      // 점수 상태
+      const [score, setScore] = useState(0);
+
+      // 입력창이 변경될 때마다 호출되는 함수
+      function handleChange(e) {
+        setInputValue(e.target.value); // 입력된 값 저장
+      }
+
+      // 추가 버튼 클릭 시 호출되는 함수
+      function handleClick() {
+        if (inputVal.trim() === '') {
+          // 아무것도 입력 안 했을 때 경고
+          alert('할 일을 입력해주세요!');
+          return;
+        }
+        setTodo([...todo, inputVal]); // 기존 할 일 목록 + 새로운 입력 추가
+        setScore(score + 5);           // 점수 5점 추가
+        setInputValue('');             // 입력창 비우기
+      }
+
+      // 리스트 항목을 클릭하면 해당 항목 삭제하는 함수
+      function handleClickList(e, idx) {
+        const newTodo = todo.filter((_, i) => i !== idx); // 클릭한 것 빼고 나머지 리스트로 새로 만듦
+        setTodo(newTodo);         // 새로운 리스트로 업데이트
+        setScore(score - 5);       // 점수 5점 차감
+      }
+
+      // 화면에 표시할 내용
+      return (
+        <div>
+          <main>
+            {/* 점수 컴포넌트 */}
+            <ScoreComp score={score} />
+
+            {/* 할 일 입력 및 리스트 컴포넌트 */}
+            <TodoContainer 
+              onClickHandler={handleClick}
+              onChangeHandler={handleChange}
+              inputVal={inputVal}
+              todoList={todo}
+              onClickCB={handleClickList}
+            />
+
+            {/* 푸터 컴포넌트 */}
+            <Footer />
+          </main>
+        </div>
+      );
+    };
+
+    // 최상위 컴포넌트 App
+    const App = () => {
+      return <Container />;
+    };
+
+    // 실제 웹페이지에 리액트 앱 렌더링
+    ReactDOM.createRoot(document.querySelector('#root')).render(<App />);
+  </script>
+</body>
+</html>

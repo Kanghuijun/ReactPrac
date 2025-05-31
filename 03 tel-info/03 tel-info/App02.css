@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;700&display=swap');
+
+body {
+  overflow-y: hidden;
+  font-family: 'Noto Serif KR', serif;
+}
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; 
+  align-items: center;
+  padding-top: 30px;
+}
+
+.user-list-wrap {
+  margin-top: 20px;
+  height: 400px;
+  overflow-y: scroll;
+}
+
+.list-box {
+  background-color: rgb(252, 150, 16);
+  padding: 10px 50px 30px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.list-box h2 {
+  margin-bottom: 5px;
+}
+
+.list-box b {
+  margin-right: 10px;
+}
+
+.input-wrap {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 270px;
+  background-color: rgb(246, 246, 240);
+  padding: 30px 30px 20px;
+  border-radius: 5px;
+}
+
+.input-wrap input {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid rgb(213, 213, 213);
+}
+
+.input-wrap button {
+  padding: 10px;
+  width: 100px;
+  align-self: center;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  background-color: rgb(1, 206, 11);
+  color: white;
+  font-weight: 700;
+  letter-spacing: 0.05rem;
+  font-size: 1rem;
+}
+
+.modal-back {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 10;
+  background: rgba(38, 38, 38, 0.75);
+}
+
+.modal-wrap {
+  position: fixed;
+  top: 30vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  z-index: 100;
+  overflow: hidden;
+  background-color: rgb(248, 248, 248);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.modal-wrap header {
+  background-color: rgb(252, 150, 16);
+  width: 100%;
+  color: white;
+  padding-left: 30px;
+}
+
+.modal-wrap header h2 {
+  margin-bottom: 13px;
+}
+
+.modal-wrap .content {
+  padding-top: 30px;
+}
+
+.modal-wrap footer {
+  align-self:flex-end;
+  padding: 20px;
+}
+
+.modal-wrap footer button {
+  padding: 8px 35px;
+  background-color: rgb(1, 206, 11);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+}
+
+select {
+  padding: 5px;
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+}
+
+#x-btn {
+  background-color: transparent;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  border: none;
+  padding: 10px;
+}
+
+#visible-form-btn {
+  background-color: rgb(1, 206, 11);
+  padding: 30px 60px;
+  font-size: 1.1rem;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-family: 'Noto Serif KR', serif;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.header {
+  background-color: rgb(255, 249, 240);
+  border-bottom: 3px solid rgb(255, 205, 139);
+  padding: 10px 30px;
+  text-align: right;
+}
+
+.header p {
+  font-size: 0.9rem;
+  color: rgb(119, 119, 119);
+}
+
+.header span {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: rgb(21, 21, 21);
+  margin-right: 5px;
+}

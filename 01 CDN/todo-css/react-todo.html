@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>React Todolist</title>
+  <link rel="stylesheet" href="./todo.css" />
+</head>
+<body>
+
+  <div id="root"></div>
+
+  <!-- React & Babel -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+{
+    //   //html에서 css 적용방법 세가지 링크하고스타일에 넣기 (인라인) 스타일 태그 연결, 일반 태그 연결
+        //유니코드 이모지 window+.
+        //div태그 사용시 querySelector로 하면 div asdfasd asdvd 이렇게 찾아야해서 아예 없는 태그 하나 사용 Fragment태그 사용
+        // inVal은 상태 변화, setInval은 상태를 변화시키는 함수  초기값은 useState뒤 인지
+
+}
+    const TodoItem = (props) => {
+      return (
+        // <li>집가기</li>
+        <li onClick={props.onClickCB}>{props.todo}</li>
+      );
+    };
+
+    const ScoreComp = (props) => {
+      return (
+        <section className="score-container">
+          <p>칭찬점수 : <span id="score-num">{props.score}</span>점</p>
+        </section>
+      );
+    };
+
+    const Footer = () => {
+      return (
+        <footer>
+          Copyright © 2022 All Rights Reserved.
+        </footer>
+      );
+    };
+
+    const TodoContainer = (props) => {
+      return (
+        <section>
+          <h2>할일목록</h2>
+          <input 
+            value={props.inputVal} 
+            onChange={props.onChangeHandler} 
+            className="default-input" 
+            type="text" 
+          />
+          <button 
+            onClick={props.onClickHandler} 
+            className="addTodoBtn"
+          >
+            ✚
+          </button>
+          <ul id="list-box">
+            {
+              props.todoList.map((item, idx) => (
+                <TodoItem 
+                  todo={item} 
+                  key={idx} 
+                  onClickCB={props.onClickCB} 
+                />
+              ))
+            }
+          </ul>
+        </section>
+      );
+    };
+
+    const Container = () => {
+      const [inputVal, setInputValue] = React.useState('');
+      const [todo, setTodo] = React.useState([]);
+      const [score, setScore] = React.useState(0);
+
+      function handleChange(e) {
+        setInputValue(e.target.value);
+      }
+
+      function handleClick() {
+        setTodo([...todo, inputVal]);
+        setScore(score + 5);
+        setInputValue('');
+      }
+
+      function handleClickList(child) {
+        console.log('클릭했습니다');
+        alert(child.target.innerHTML);
+      }
+
+      return (
+        <div>
+          <main>
+            <ScoreComp score={score} />
+            <TodoContainer 
+              onClickHandler={handleClick}
+              onChangeHandler={handleChange}
+              inputVal={inputVal}
+              todoList={todo}
+              onClickCB={handleClickList}
+            />
+            <Footer />
+          </main>
+        </div>
+      );
+    };
+
+    const App = () => {
+      return <Container />;
+    };
+
+    ReactDOM.createRoot(document.querySelector('#root')).render(<App />);
+  </script>
+</body>
+</html>
